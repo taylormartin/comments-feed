@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { GET_COMMENTS_URL } from './constants';
+import { GET_COMMENTS_URL } from '../constants';
 
 const useComments = () => {
   const [comments, setComments] = useState([]);

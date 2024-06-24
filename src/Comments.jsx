@@ -5,11 +5,13 @@ export const Comments = ({ comments }) => {
     return (
         <>
             {comments.map(comment => {
-                return (<Card>
-                    <CardBody>
-                        <Text>{comment.message}</Text>
-                    </CardBody>
-                </Card>)
+                return (
+                    <Card key={comment.id}>
+                        <CardBody>
+                            <Text>{comment.message}</Text>
+                        </CardBody>
+                    </Card>
+                )
             })}
         </>
 
