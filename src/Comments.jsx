@@ -7,9 +7,11 @@ export const Comments = ({ comments }) => {
             {comments.map(comment => {
                 return (
                     <Card key={comment.id}>
+                        <CardHeader>{comment.created}</CardHeader>
                         <CardBody>
                             <Text>{comment.message}</Text>
                         </CardBody>
+                        <CardFooter>{comment.name}</CardFooter>
                     </Card>
                 )
             })}

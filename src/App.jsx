@@ -8,7 +8,7 @@ import { Button, Textarea, Input } from '@chakra-ui/react';
 function App() {
   const [textValue, setTextValue] = useState();
   const [name, setName] = useState(''); 
-  const { comments, loading, error } = useComments();
+  const { fetchData, comments, loading, error } = useComments();
   const { submitComment, loading: commentLoading, error: commentError } = useCommenter();
 
   const handleTextChange = (e) => {
@@ -21,8 +21,11 @@ function App() {
     setName(val);
   }
 
-  const handleSubmitComment = () => {
-    submitComment(name, textValue);
+  const handleSubmitComment = async () => {
+    const ok = await submitComment(name, textValue);
+    if (ok) {
+      fetchData();
+    }
   }
 
   return (
@@ -32,7 +35,7 @@ function App() {
       <Textarea
         value={textValue}
         onChange={handleTextChange}
-        placeholder="Well I'd like to comment on that..."
+        placeholder="I have a comment on that..."
         size='md'
       />
       <Button onClick={handleSubmitComment} colorScheme='blue'>Say It!</Button>

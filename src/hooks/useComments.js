@@ -6,27 +6,27 @@ const useComments = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // debugger;
-        const response = await fetch(GET_COMMENTS_URL);
-        // if (!response.ok) {
-        //   throw new Error('Network response was not ok');
-        // }
-        const result = await response.json();
-        setComments(result);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      // debugger;
+      const response = await fetch(GET_COMMENTS_URL);
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok');
+      // }
+      const result = await response.json();
+      setComments(result);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
-  return { comments, loading, error };
+  return { fetchData, comments, loading, error };
 };
 
 export default useComments;

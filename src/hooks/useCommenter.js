@@ -6,7 +6,6 @@ const useCommenter = () => {
   const [error, setError] = useState();
 
   const submitComment = async (name, text) => {
-    debugger;
     try {
         const response = await fetch(POST_COMMENT_URL, {
             method: "POST",
@@ -16,8 +15,7 @@ const useCommenter = () => {
             },
             body: JSON.stringify({name: name, message: text}),
           });
-        const result = await response.json();
-        console.log(result);
+        return response.ok;
       } catch (error) {
         // setError(error);
       } finally {
