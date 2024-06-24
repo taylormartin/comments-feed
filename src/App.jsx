@@ -16,6 +16,11 @@ function App() {
     setTextValue(val);
   }
 
+  const resetInputs = () => {
+    setTextValue("");
+    setName("");
+  }
+
   const handleNameChange = (e) => {
     const val = e.target.value;
     setName(val);
@@ -24,6 +29,7 @@ function App() {
   const handleSubmitComment = async () => {
     const ok = await submitComment(name, textValue);
     if (ok) {
+      resetInputs();
       fetchData();
     }
   }
