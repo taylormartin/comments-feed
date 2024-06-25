@@ -23,7 +23,9 @@
 }
 
 .comment-container {
-  .name-input, .text-area {
+
+  .name-input,
+  .text-area {
     background: white;
     margin-bottom: 10px;
   }
@@ -54,4 +56,12 @@
 .message-time {
   font-size: 14px;
   color: #718096;
+}
+
+.loading-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
