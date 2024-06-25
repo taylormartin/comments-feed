@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Text } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter } from '@chakra-ui/react'
 
 export const Comments = ({ comments }) => {
     return (
@@ -7,15 +7,11 @@ export const Comments = ({ comments }) => {
             {comments.map(comment => {
                 return (
                     <Card key={comment.id}>
-                        <CardHeader>{comment.created}</CardHeader>
-                        <CardBody>
-                            <Text>{comment.message}</Text>
-                        </CardBody>
-                        <CardFooter>{comment.name}</CardFooter>
+                        <CardBody>{comment.message}</CardBody>
+                        <CardFooter>{`${comment.name} on ${comment.created}`}</CardFooter>
                     </Card>
                 )
             })}
         </>
-
     )
 };
