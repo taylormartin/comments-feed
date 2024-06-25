@@ -48,22 +48,27 @@ function App() {
   }
 
   return (
-    <>
+    <div className="app-container">
       {loading ? (<div>load it up</div>) : (
         <div className="card-container" ref={commentsRef}>
           <Comments comments={comments} />
         </div>
       )}
-      <Input placeholder='Name' value={name} onChange={handleNameChange} />
-      <Textarea
-        value={textValue}
-        onChange={handleTextChange}
-        placeholder="I have a comment on that..."
-        size='md'
-      />
-      <Button onClick={handleSubmitComment} colorScheme='blue'>Say It!</Button>
-      <Button onClick={scrollComments} colorScheme='blue'>Scroll It</Button>
-    </>
+      <div className="comment-container">
+        <Input aria-label="Name Input" className="name-input" placeholder='Name' value={name} onChange={handleNameChange} />
+        <Textarea
+          className="text-area"
+          aria-label="Comment Input"
+          value={textValue}
+          onChange={handleTextChange}
+          placeholder="I have a comment on that..."
+          size='md'
+        />
+        <div className="button-container">
+          <Button aria-label="Submit Comment" background-color="white" onClick={handleSubmitComment} colorScheme='blue'>Say It!</Button>
+        </div>
+      </div>
+    </div>
   )
 }
 
