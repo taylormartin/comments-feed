@@ -3,14 +3,15 @@ import { useRef, useState, useEffect } from 'react';
 import useComments from '../hooks/useComments'
 import useCommenter from '../hooks/useCommenter';
 import { Comments } from './Comments';
-import { Button, Textarea, Input, Spinner } from '@chakra-ui/react';
+import { useToast, Button, Textarea, Input, Spinner } from '@chakra-ui/react';
 
 function App() {
   const commentsRef = useRef();
   const [name, setName] = useState("");
   const [textValue, setTextValue] = useState("");
-  const { fetchData, comments, loading, error } = useComments();
-  const { submitComment, loading: commentLoading, error: commentError } = useCommenter();
+  const toast = useToast()
+  const { fetchData, comments, loading: commentsLoading } = useComments(toast);
+  const { submitComment, loading: commentLoading, error: commentError } = useCommenter(toast);
   const btnDisabled = name === "" || textValue === "";
 
   useEffect(() => {
@@ -51,7 +52,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="card-container" ref={commentsRef}>
-        {loading ?
+        {commentsLoading ?
           (
             <div className="loading-container">
               <Spinner
@@ -78,7 +79,7 @@ function App() {
           size='md'
         />
         <div className="button-container">
-          <Button aria-label="Submit Comment" isDisabled={btnDisabled} onClick={handleSubmitComment} colorScheme='blue'>Say It!</Button>
+          <Button aria-label="Submit Comment" isLoading={commentLoading} isDisabled={btnDisabled} onClick={handleSubmitComment} colorScheme='blue'>Say It!</Button>
         </div>
       </div>
     </div>

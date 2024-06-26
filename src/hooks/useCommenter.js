@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { POST_COMMENT_URL } from '../constants';
 
-const useCommenter = () => {
-  const [loading, setLoading] = useState(true);
+const useCommenter = (toast) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   const submitComment = async (name, text) => {
+    setLoading(true);
     try {
         const response = await fetch(POST_COMMENT_URL, {
             method: "POST",
@@ -17,9 +18,9 @@ const useCommenter = () => {
           });
         return response.ok;
       } catch (error) {
-        // setError(error);
+        setError(error);
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
   }
 
