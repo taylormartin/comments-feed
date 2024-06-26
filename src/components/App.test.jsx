@@ -54,6 +54,20 @@ describe('App', () => {
       expect(nameInput).toHaveValue('');
       expect(textInput).toHaveValue('');
     });
+  });
 
+  it('disables the submit button if inputs are empty and enables when filled', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    const nameInput = screen.getByLabelText('Name Input');
+    const textInput = screen.getByLabelText('Comment Input');
+    const submitButton = screen.getByLabelText('Submit Comment');
+
+    expect(submitButton).toBeDisabled();
+
+    await user.type(nameInput, 'Taylor');
+    await user.type(textInput, 'I have a comment');
+
+    expect(submitButton).toBeEnabled();
   });
 });
