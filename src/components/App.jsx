@@ -11,7 +11,7 @@ function App() {
   const [textValue, setTextValue] = useState("");
   const toast = useToast()
   const { fetchData, comments, loading: commentsLoading } = useComments(toast);
-  const { submitComment, loading: commentLoading, error: commentError } = useCommenter(toast);
+  const { submitComment, loading: commentLoading } = useCommenter(toast);
   const btnDisabled = name === "" || textValue === "";
 
   useEffect(() => {

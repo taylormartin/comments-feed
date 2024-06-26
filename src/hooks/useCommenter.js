@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { POST_COMMENT_URL } from '../constants';
 
 const useCommenter = (toast) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
 
   const submitComment = async (name, text) => {
     setLoading(true);
@@ -18,13 +17,27 @@ const useCommenter = (toast) => {
           });
         return response.ok;
       } catch (error) {
-        setError(error);
+        toast({
+          title: 'Comment save error',
+          position: 'top-right',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+        })
+        setLoading(false);
       } finally {
+        toast({
+          title: 'Comment saved!',
+          position: 'top-right',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        })
         setLoading(false);
       }
   }
 
-  return { submitComment, loading, error };
+  return { submitComment, loading };
 };
 
 export default useCommenter;
